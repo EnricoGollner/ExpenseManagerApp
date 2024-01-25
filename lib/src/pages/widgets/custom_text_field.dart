@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final String hintText;
+  final bool isAutfocus;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -15,10 +16,11 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
-    required this.label,
-    required this.hintText,
     this.controller,
     this.focusNode,
+    required this.label,
+    required this.hintText,
+    this.isAutfocus = false,
     this.keyboardType,
     this.prefixIcon,
     this.validatorFunction,

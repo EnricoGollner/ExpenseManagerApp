@@ -7,7 +7,9 @@ class CardTransaction extends StatelessWidget {
   final String title;
   final double value;
   final DateTime date;
-  const CardTransaction({super.key, required this.title, required this.value, required this.date});
+  final Future<void> Function() addTransaction;
+
+  const CardTransaction({super.key, required this.title, required this.value, required this.date, required this.addTransaction});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CardTransaction extends StatelessWidget {
                 width: 2,
               ),
             ),
-            child: Text(Formatters.doubleToCurrency(value)),
+            child: Text(Formatters.doubleToCurrency(value), style: valueTextStyle,),
           ),
 
           Column(children: [
