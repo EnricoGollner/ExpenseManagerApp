@@ -1,8 +1,10 @@
 import 'package:expenses_manager_app/src/blocs/transaction_bloc.dart';
 import 'package:expenses_manager_app/src/blocs/transaction_event.dart';
 import 'package:expenses_manager_app/src/blocs/transaction_state.dart';
+import 'package:expenses_manager_app/src/core/colors.dart';
 import 'package:expenses_manager_app/src/core/utils/formatters/formatters.dart';
 import 'package:expenses_manager_app/src/models/transaction_model.dart';
+import 'package:expenses_manager_app/src/pages/widgets/chart/card_chart.dart';
 import 'package:expenses_manager_app/src/pages/widgets/custom_list_loader.dart';
 import 'package:expenses_manager_app/src/pages/widgets/form_transaction.dart';
 import 'package:expenses_manager_app/src/pages/widgets/transactions_list.dart';
@@ -44,7 +46,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Despesas Pessoais'),
-        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -60,19 +61,19 @@ class _HomePageState extends State<HomePage> {
 
               return Column(
                 children: [
+                  CardChart(recentTransactions: snapshot.data!.recentTransactions ?? []),
+                  const SizedBox(height: 20),
                   CustomListLoader(
                     state: snapshot.data!,
                     isEmptyList: transactions.isEmpty,
                     buildLoadingList: () {
                       return Shimmer.fromColors(
-                        baseColor: Colors.red,
-                        highlightColor: Colors.yellow,
+                        baseColor: colorSecondary.withOpacity(0.7),
+                        highlightColor: colorPrimary.withOpacity(0.5),
                         child: TransactionsList(transactions: transactions),
                       );
                     },
-                    buildLoadedList: () {
-                      return TransactionsList(transactions: transactions);
-                    },
+                    buildLoadedList: () => TransactionsList(transactions: transactions),
                   )
                 ],
               );

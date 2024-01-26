@@ -17,7 +17,6 @@ class CustomListLoader extends StatelessWidget {
       return Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Lottie.asset('assets/empty_list.json'),
             const SizedBox(height: 15),

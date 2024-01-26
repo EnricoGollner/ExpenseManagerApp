@@ -29,7 +29,11 @@ class TransactionBloc {
             (updatedTransactions) => transactions.addAll(updatedTransactions),
           );
     }
+    
+    final List<TransactionModel> recentTransactions = transactions.where(
+          (transaction) => transaction.date.isAfter(DateTime.now().subtract(const Duration(days: 7))),
+        ).toList();
 
-    _outputTransactionController.add(SuccessTransactionState(transactions: transactions));
+    _outputTransactionController.add(SuccessTransactionState(transactions: transactions, recentTransactions: recentTransactions));
   }
 }

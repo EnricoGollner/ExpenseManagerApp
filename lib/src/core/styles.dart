@@ -5,6 +5,12 @@ class Styles {
   static ThemeData setMaterial3Style() {
     return ThemeData(
       useMaterial3: true,
+      scaffoldBackgroundColor: colorBackground,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: colorPrimary,
+        foregroundColor: colorOnSurface,
+        centerTitle: true,
+      ),
       colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: colorPrimary,

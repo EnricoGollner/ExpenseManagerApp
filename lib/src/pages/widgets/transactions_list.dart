@@ -7,6 +7,8 @@ class TransactionsList extends StatelessWidget {
 
   const TransactionsList({super.key, required this.transactions,});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -14,7 +16,7 @@ class TransactionsList extends StatelessWidget {
       itemCount: transactions.length,
       itemBuilder: (_, index) {
         final TransactionModel transaction = transactions[index];
-
+        
         return CardTransaction(
           title: transaction.title,
           value: transaction.value,
