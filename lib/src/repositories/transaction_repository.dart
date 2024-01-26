@@ -5,15 +5,16 @@ import 'package:sqflite/sqflite.dart';
 
 class TransactionRepository {
   final DBRepostiory _dbRepository = DBRepostiory();
-  final List<TransactionModel> transactionsList = List<TransactionModel>.empty();
+  final List<TransactionModel> transactionsList = List<TransactionModel>.empty(growable: true);
   
   Future<List<TransactionModel>> getTransactions() async {
     final Database db = await _dbRepository.getDatabase();
 
-    final List<Map<String, dynamic>> data = await db.rawQuery('SELECT * FROM ${DBUtils.transactionTable}');
-    transactionsList.addAll(
-      data.map((e) => TransactionModel.fromJson(e)).toList()
-    );
+    await db.rawQuery('SELECT * FROM ${DBUtils.transactionTable}').then((data) {
+      transactionsList.addAll(
+        data.map((e) => TransactionModel.fromJson(e)).toList()
+      );
+    });
 
     return transactionsList;
   }

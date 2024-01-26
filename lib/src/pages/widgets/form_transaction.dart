@@ -3,18 +3,19 @@ import 'package:expenses_manager_app/src/core/utils/validator.dart';
 import 'package:expenses_manager_app/src/pages/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-class CardAddTransactionForm extends StatefulWidget {
+class FormTransaction extends StatefulWidget {
   final TextEditingController titleController;
   final TextEditingController valueController;
+  final void Function() addTransaction; 
 
   ///Método construtor da classe
-  const CardAddTransactionForm({super.key, required this.titleController, required this.valueController});
+  const FormTransaction({super.key, required this.titleController, required this.valueController, required this.addTransaction});
 
   @override
-  State<CardAddTransactionForm> createState() => _CardAddTransactionFormState();
+  State<FormTransaction> createState() => _FormTransactionState();
 }
 
-class _CardAddTransactionFormState extends State<CardAddTransactionForm> {
+class _FormTransactionState extends State<FormTransaction> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final FocusNode _titleFocusNode = FocusNode();
@@ -55,11 +56,14 @@ class _CardAddTransactionFormState extends State<CardAddTransactionForm> {
                   children: [
                     TextButton(
                       child: const Text('Nova Transação'),
-                      onPressed: () {
-                        if(_formKey.currentState!.validate()) {
-                          debugPrint('Validado');
-                        }
-                      },
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        widget.addTransaction();
+                        widget.titleController.clear();
+                        widget.valueController.clear();
+                        Navigator.pop(context);
+                      }
+                    },
                     ),
                   ],
                 ),

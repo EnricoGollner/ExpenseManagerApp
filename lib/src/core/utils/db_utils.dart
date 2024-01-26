@@ -1,6 +1,6 @@
 class DBUtils {
   static const String dbName = 'expense_manager.db';
-  static const String transactionTable = 'transaction';
+  static const String transactionTable = 'transactions_table';
 
   static const String createTableQuery = '''
     CREATE TABLE $transactionTable (
