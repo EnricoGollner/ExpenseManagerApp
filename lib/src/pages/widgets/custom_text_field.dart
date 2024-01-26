@@ -1,3 +1,4 @@
+import 'package:expenses_manager_app/src/core/colors.dart';
 import 'package:expenses_manager_app/src/core/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,24 +38,25 @@ class CustomTextField extends StatelessWidget {
           margin: const EdgeInsets.only(left: 5),
           child: Text(
             label,
-            style: labelStyle,
+            style: labelTextFieldStyle,
           ),
         ),
         const SizedBox(height: 10),
         TextFormField(
+          style: TextStyle(color: colorOnBackground.withOpacity(0.7)),
           onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           controller: controller,
           focusNode: focusNode,
           keyboardType: keyboardType,
           decoration: InputDecoration(
-            border: const OutlineInputBorder(),
+            enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: colorPrimary)),
+            border: const OutlineInputBorder(borderSide: BorderSide(color: colorPrimary)),
             hintText: hintText,
             prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
           ),
           validator: validatorFunction,
           onFieldSubmitted: onFieldSubmitted,
           inputFormatters: inputFormatters,
-          
         ),
       ],
     );

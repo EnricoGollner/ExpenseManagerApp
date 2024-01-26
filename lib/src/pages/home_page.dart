@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: colorBackground,
         title: const Text('Despesas Pessoais'),
         actions: [
           IconButton(

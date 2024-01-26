@@ -11,6 +11,13 @@ class Styles {
         foregroundColor: colorOnSurface,
         centerTitle: true,
       ),
+      datePickerTheme: DatePickerThemeData(
+        surfaceTintColor: colorSecondary,
+        headerBackgroundColor: colorPrimary,
+        headerForegroundColor: colorSurface,
+        dayBackgroundColor: MaterialStateProperty.resolveWith((states) => states.contains(MaterialState.selected) ? colorSecondary : colorBackground),
+        todayBackgroundColor:  MaterialStateProperty.resolveWith((states) => states.contains(MaterialState.selected) ? colorSecondary : colorBackground),
+      ),
       colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: colorPrimary,

@@ -17,36 +17,30 @@ class CardTransaction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: colorPrimary,
-                width: 2,
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: colorPrimary,
+          radius: 30,
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: FittedBox(
+              child: Text(
+                Formatters.doubleToCurrency(value),
+                style: valueTextStyle,
               ),
-            ),
-            child: Text(
-              Formatters.doubleToCurrency(value),
-              style: valueTextStyle,
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: labelStyle,
-              ),
-              Text(
-                Formatters.dateTimeToDate(date),
-                style: transactionDateStyle,
-              ),
-            ],
-          )
-        ],
+        ),
+        title: Text(
+          title,
+          style: labelStyle,
+        ),
+        subtitle: Text(
+          Formatters.dateTimeToDate(date),
+          style: TextStyle(color: colorGrey),
+        ),
       ),
     );
   }

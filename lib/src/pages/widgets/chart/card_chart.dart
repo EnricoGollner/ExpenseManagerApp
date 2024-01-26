@@ -11,7 +11,7 @@ class CardChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 4,
       margin: const EdgeInsets.all(7),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -49,12 +49,12 @@ class CardChart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1), //.E() returns the day of the week in a short format - intl package
         'value': totalSum
       };
-    });
+    }).reversed.toList();
   }
 
   double  _getPercentage({required double totalDayValue}) { 
     double weekTotal = groupedTransactions.fold(0.0, (previousValue, element) => previousValue + element['value']);
 
-    return totalDayValue / weekTotal;
+    return (totalDayValue / weekTotal) > 0 ? (totalDayValue / weekTotal) : 0;
   }
 }
