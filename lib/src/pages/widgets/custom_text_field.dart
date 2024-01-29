@@ -43,8 +43,8 @@ class CustomTextField extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         TextFormField(
-          style: TextStyle(color: colorOnBackground.withOpacity(0.7)),
           onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+          style: TextStyle(color: colorOnBackground.withOpacity(0.7)),
           controller: controller,
           focusNode: focusNode,
           keyboardType: keyboardType,

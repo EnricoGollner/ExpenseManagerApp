@@ -22,8 +22,17 @@ class TransactionRepository {
   Future<List<TransactionModel>> saveTransaction({required TransactionModel newTransaction}) async {
     final Database db = await _dbRepository.getDatabase();
 
-    await db.rawInsert('INSERT INTO ${DBUtils.transactionTable} (title, value, date) VALUES (?, ?, ?)', [newTransaction.title, newTransaction.value, newTransaction.date.toIso8601String()]);
-    transactionsList.add(newTransaction);
+    final int transactionId = await db.rawInsert('INSERT INTO ${DBUtils.transactionTable} (title, value, date) VALUES (?, ?, ?)', [newTransaction.title, newTransaction.value, newTransaction.date.toIso8601String()]);
+    transactionsList.add(newTransaction.copyWith(id: transactionId));
+
+    return transactionsList;
+  }
+
+  Future<List<TransactionModel>> deleteTransaction({required int id}) async {
+    final Database db = await _dbRepository.getDatabase();
+
+    await db.rawDelete('DELETE FROM ${DBUtils.transactionTable} WHERE id = ?', [id]);
+    transactionsList.removeWhere((element) => element.id == id);
 
     return transactionsList;
   }

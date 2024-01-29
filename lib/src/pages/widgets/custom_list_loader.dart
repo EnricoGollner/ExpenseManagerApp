@@ -8,24 +8,36 @@ class CustomListLoader extends StatelessWidget {
   final bool isEmptyList;
   final Widget Function() buildLoadedList;
   final Widget Function() buildLoadingList;
-  
-  const CustomListLoader({super.key,required this.state, required this.isEmptyList, required this.buildLoadedList, required this.buildLoadingList});
+
+  const CustomListLoader({
+    super.key,
+    required this.state,
+    required this.isEmptyList,
+    required this.buildLoadedList,
+    required this.buildLoadingList,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (isEmptyList) {
+    if (state is LoadingTransactionState) {
+      return Card(
+        elevation: 6,
+        child: buildLoadingList(),
+      );
+    } else if (isEmptyList) {
       return Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset('assets/empty_list.json'),
+            Lottie.asset('assets/empty_list.json', repeat: false),
             const SizedBox(height: 15),
-            Text('Não há despesas cadastradas', style: notFoundStyle,),
+            Text(
+              'Não há despesas cadastradas',
+              style: notFoundStyle,
+            ),
           ],
         ),
       );
-    } else if (state is LoadingTransactionState) {
-      return buildLoadingList();
     }
     return buildLoadedList();
   }

@@ -25,11 +25,13 @@ class TransactionBloc {
     if (event is LoadTransactionEvent) {
       await _transactionRepository.getTransactions().then((value) => transactions.addAll(value));
     } else if (event is AddTransactionEvent) {
-      await _transactionRepository.saveTransaction(newTransaction: event.transaction).then(
-            (updatedTransactions) => transactions.addAll(updatedTransactions),
-          );
+      await _transactionRepository.saveTransaction(newTransaction: event.transaction)
+        .then((updatedTransactions) => transactions.addAll(updatedTransactions));
+    } else if (event is DeleteTransactionEvent) {
+      await _transactionRepository.deleteTransaction(id: event.id)
+          .then((updatedTransactions) => transactions.addAll(updatedTransactions));
     }
-    
+
     final List<TransactionModel> recentTransactions = transactions.where(
           (transaction) => transaction.date.isAfter(DateTime.now().subtract(const Duration(days: 7))),
         ).toList();

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class FormTransaction extends StatefulWidget {
   final TextEditingController titleController;
   final TextEditingController valueController;
-  final void Function() addTransaction;
+  final void Function({required DateTime selectedDate}) addTransaction;
 
   ///Método construtor da classe
   const FormTransaction(
@@ -28,12 +28,13 @@ class _FormTransactionState extends State<FormTransaction> {
   final FocusNode _titleFocusNode = FocusNode();
   final FocusNode _valueFocusNode = FocusNode();
 
-  DateTime? _selectedDate;
+  DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SingleChildScrollView(
       child: Container(
+        padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
         child: Form(
           key: _formKey,
@@ -66,16 +67,17 @@ class _FormTransactionState extends State<FormTransaction> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text( _selectedDate == null ? 'Nenhuma data selecionada!' : Formatters.dateTimeToDate(_selectedDate!), style: labelStyle,),
+                    Text(Formatters.dateTimeToDate(_selectedDate), style: labelStyle,),
                     TextButton(
                       style: TextButton.styleFrom(foregroundColor: colorPrimary),
                       child: const Text(
                         'Selecionar Data',
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      onPressed: () async {
-                        showDatePicker(context: context, firstDate: DateTime(2000), lastDate:DateTime.now(), )
-                          .then((date) => setState(() => _selectedDate = date));
+                      onPressed: () {
+                        showDatePicker(context: context, firstDate: DateTime(2000), lastDate: DateTime.now()).then((date) {
+                          setState(() => _selectedDate = date ?? DateTime.now());
+                        });
                       },
                     ),
                   ],
@@ -92,7 +94,7 @@ class _FormTransactionState extends State<FormTransaction> {
                     child: const Text('Nova Transação'),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        widget.addTransaction();
+                        widget.addTransaction(selectedDate: _selectedDate);
                         widget.titleController.clear();
                         widget.valueController.clear();
                         Navigator.pop(context);

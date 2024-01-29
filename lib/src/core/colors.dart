@@ -12,3 +12,6 @@ const Color colorError = Color(0xffD32F2F);
 const Color colorOnError = Color(0xffF9F9F9);
 
 const Color colorGrey = Colors.grey;
+
+Color colorBaseShimmer = colorGrey.withOpacity(0.2);
+const Color colorHighlightShimmer = Color.fromARGB(255, 243, 247, 241);
