@@ -1,2 +1,3 @@
-# ExpenseManagerApp
-A Flutter app to manage expenses in an easy way.
+# expenses_manager_app
+
+An easy way to manage your expenses.
