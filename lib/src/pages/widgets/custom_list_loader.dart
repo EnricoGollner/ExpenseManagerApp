@@ -25,18 +25,16 @@ class CustomListLoader extends StatelessWidget {
         child: buildLoadingList(),
       );
     } else if (isEmptyList) {
-      return Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset('assets/empty_list.json', repeat: false),
-            const SizedBox(height: 15),
-            Text(
-              'Não há despesas cadastradas',
-              style: notFoundStyle,
-            ),
-          ],
-        ),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset('assets/empty_list.json', repeat: false),
+          const SizedBox(height: 15),
+          Text(
+            'Não há despesas cadastradas',
+            style: notFoundStyle,
+          ),
+        ],
       );
     }
     return buildLoadedList();
