@@ -159,6 +159,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   Future<void> _showAddTransactionForm(BuildContext context) async {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (_) {
         return FormTransaction(

@@ -32,10 +32,11 @@ class _FormTransactionState extends State<FormTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
+        height: 350,
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
@@ -67,9 +68,15 @@ class _FormTransactionState extends State<FormTransaction> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(Formatters.dateTimeToDate(_selectedDate), style: labelStyle,),
+                    Row(
+                      children: [
+                        const Icon(Icons.date_range, color: colorSecondary),
+                        const SizedBox(width: 4),
+                        Text(Formatters.dateTimeToDate(_selectedDate), style: labelStyle.copyWith(color: colorPrimary)),
+                      ],
+                    ),
                     TextButton(
-                      style: TextButton.styleFrom(foregroundColor: colorPrimary),
+                      style: TextButton.styleFrom(foregroundColor: colorSecondary),
                       child: const Text(
                         'Selecionar Data',
                         style: TextStyle(fontWeight: FontWeight.w600),
@@ -88,7 +95,7 @@ class _FormTransactionState extends State<FormTransaction> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: colorPrimary,
+                      backgroundColor: colorSecondary,
                       foregroundColor: colorOnPrimary,
                     ),
                     child: const Text('Nova Transação'),
